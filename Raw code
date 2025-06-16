@@ -1,0 +1,94 @@
+import customtkinter as ctk
+from PIL import Image
+
+ctk.set_widget_scaling(1.1)
+ctk.set_appearance_mode("light")
+
+class CafeOrderingApp(ctk.CTk):
+    def __init__(self):
+        super().__init__()
+        self.title("Green Leaf Café")
+        self.geometry("800x600")
+
+        #top bar with green background
+        top_frame = ctk.CTkFrame(self, fg_color="#396828", height=80)
+        top_frame.pack(fill="x", padx=10, pady=0)
+
+        #cafe name centered
+        cafe_name = ctk.CTkLabel(
+            top_frame,
+            text="Caleb & Co. Eatery",
+            font=("Arial", 24, "bold"),
+            text_color="white"
+        )
+        cafe_name.pack(pady=20)
+
+        #logo pinned top-right
+        logo_image = ctk.CTkImage(Image.open(r"C:\Users\ariel\Downloads\logo.png"), size=(64, 64))
+        logo_label = ctk.CTkLabel(top_frame, image=logo_image, text="")
+        logo_label.place(relx=1.0, anchor="ne", x=-10, y=10)
+
+        #main tab view with green colors
+        self.tabview = ctk.CTkTabview(
+            self,
+            width=780,
+            height=520,
+            segmented_button_fg_color="#A5D6A7",
+            segmented_button_selected_color="#388E3C",
+            segmented_button_unselected_color="#81C784",
+            segmented_button_selected_hover_color="#2E7D32"
+        )
+        self.tabview.pack(padx=10, pady=(0, 10), expand=True, fill="both")
+
+        #add tabs
+        self.home_tab = self.tabview.add("Home")
+        self.menu_tab = self.tabview.add("Menu")
+        self.cart_tab = self.tabview.add("Cart")
+        self.account_tab = self.tabview.add("Account")
+
+        self.build_home_tab()
+        self.build_menu_tab()
+        self.build_cart_tab()
+        self.build_account_tab()
+
+        self.logo_image = logo_image
+
+    def build_home_tab(self):
+        label = ctk.CTkLabel(
+            self.home_tab,
+            text="Welcome to the Darby Cafe!",
+            font=("Arial", 24),
+            text_color="#1B5E20"
+        )
+        label.pack(pady=20)
+
+    def build_menu_tab(self):
+        label = ctk.CTkLabel(
+            self.menu_tab,
+            text="Menu",
+            font=("Arial", 24),
+            text_color="#1B5E20"
+        )
+        label.pack(pady=10)
+
+    def build_cart_tab(self):
+        self.cart_label = ctk.CTkLabel(
+            self.cart_tab,
+            text="Cart",
+            font=("Arial", 18),
+            text_color="#1B5E20"
+        )
+        self.cart_label.pack(pady=20)
+
+    def build_account_tab(self):
+        label = ctk.CTkLabel(
+            self.account_tab,
+            text="Account",
+            font=("Arial", 18),
+            text_color="#1B5E20"
+        )
+        label.pack(pady=20)
+
+if __name__ == "__main__":
+    app = CafeOrderingApp()
+    app.mainloop()
